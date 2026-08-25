@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.deps/
+.tools/
+.idea/
+.vscode/
+
+# Runtime artifacts. Keep directory placeholders only.
+data/snapshots/*
+!data/snapshots/.gitkeep
+logs/*
+!logs/.gitkeep

@@ -1,0 +1,61 @@
+data:
+  # auto 按顺序尝试数据源；AKShare 作为可选备用适配器。
+  source: auto
+  source_order:
+    - eastmoney
+    - tencent
+    - akshare
+  timeout_seconds: 15
+  retries: 3
+  retry_backoff_seconds: 1.0
+  page_size: 100
+  pause_between_pages_seconds: 0.05
+  output_dir: data/snapshots
+
+universe:
+  include_boards:
+    - sh_main
+    - sz_main
+    - chinext
+  exclude_security_status:
+    - st
+    - star_st
+    - risk_warning
+    - delisting
+    - delisted
+  require_basic_quote: true
+
+# 下列参数按任务书先配置化；第一阶段不执行硬筛或技术指标计算。
+hard_filter:
+  total_market_cap_cny:
+    min: 5000000000
+    max: 20000000000
+  change_pct:
+    min: 1.0
+    max: 6.0
+  volume_ratio:
+    min: 1.2
+    max: 1.5
+  turnover_rate_pct:
+    min: 5.0
+    max: 15.0
+
+volume_expansion:
+  expected_to_ma5_min: 1.05
+  expected_to_ma5_max: 1.50
+  abnormal_multiple: 2.0
+
+ma_periods: [5, 10, 20]
+trend:
+  lookback_days: 60
+swing:
+  window: 3
+above_vwap_ratio_min: 0.70
+min_resistance_distance: 0.03
+scoring_weights:
+  trend: 25
+  volume: 20
+  vwap: 15
+  relative_strength: 20
+  support_resistance: 10
+  price_structure: 10

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "a-stock-monitor"
+version = "0.1.0"
+description = "A-share 14:45 quantitative monitoring and screening system"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.2,<4",
+  "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+akshare = ["akshare>=1.18"]
+dev = ["pytest>=8.0,<10"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "real_data: tests that connect to live market-data sources",
+]
+
