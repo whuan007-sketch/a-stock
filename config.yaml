@@ -25,7 +25,7 @@ universe:
     - delisted
   require_basic_quote: true
 
-# 下列参数按任务书先配置化；第一阶段不执行硬筛或技术指标计算。
+# 第一层硬筛参数，边界均包含在内。
 hard_filter:
   total_market_cap_cny:
     min: 5000000000
@@ -45,13 +45,35 @@ volume_expansion:
   expected_to_ma5_max: 1.50
   abnormal_multiple: 2.0
 
+historical:
+  # 不复权避免历史回测使用目标日之后才知道的复权因子。
+  source_order: [tencent, eastmoney, akshare]
+  adjustment: none
+  daily_lookback_calendar_days: 240
+  minimum_daily_rows: 65
+
 ma_periods: [5, 10, 20]
 trend:
   lookback_days: 60
 swing:
   window: 3
+intraday:
+  source_order: [tencent, eastmoney]
+  interval_minutes: 1
+  cutoff_1445: "14:45"
+  close_cutoff: "15:00"
+  afternoon_start: "13:00"
+  market_minutes: 240
+  high_pullback_pct: 2.0
 above_vwap_ratio_min: 0.70
+relative_strength:
+  minimum_score: 55
+  minimum_excess_return_pct: 0.0
 min_resistance_distance: 0.03
+support_resistance:
+  lookback_days: 60
+  platform_tolerance: 0.015
+  platform_minimum_touches: 3
 scoring_weights:
   trend: 25
   volume: 20
@@ -59,3 +81,15 @@ scoring_weights:
   relative_strength: 20
   support_resistance: 10
   price_structure: 10
+classification:
+  a_min_score: 80
+  b_min_score: 65
+reporting:
+  output_dir: results
+  nearest_analysis_pool_size: 30
+database:
+  path: database/a_stock.sqlite3
+scheduling:
+  live_window_start: "14:45"
+  live_window_end: "14:50"
+  close_run_time: "15:10"

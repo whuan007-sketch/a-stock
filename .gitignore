@@ -10,5 +10,9 @@ __pycache__/
 # Runtime artifacts. Keep directory placeholders only.
 data/snapshots/*
 !data/snapshots/.gitkeep
+data/stage2/
 logs/*
 !logs/.gitkeep
+database/*.sqlite3
+database/*.sqlite3-*
+results/

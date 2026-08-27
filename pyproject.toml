@@ -4,13 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "a-stock-monitor"
-version = "0.1.0"
+version = "1.0.0"
 description = "A-share 14:45 quantitative monitoring and screening system"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
   "pandas>=2.2,<4",
   "PyYAML>=6.0,<7",
+  "openpyxl>=3.1,<4",
+  "matplotlib>=3.9,<4",
 ]
 
 [project.optional-dependencies]
@@ -28,4 +30,3 @@ testpaths = ["tests"]
 markers = [
   "real_data: tests that connect to live market-data sources",
 ]
-
